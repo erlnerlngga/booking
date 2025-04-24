@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block content %}
+<main class="flex h-screen bg-primary justify-center items-center">
+  <div class="w-[340px] space-y-6">
+    <div class="space-y-2">
+      <h3 class="text-white text-center">Bookings.</h3>
+      <p class="text-neutral-200 text-sm text-center">Sign in to continue</p>
+    </div>
+    <form method="post" class="bg-white p-8 rounded-lg space-y-2">
+      {% csrf_token %}
+      <div>
+        <input name="username" type="input" class="input validator" required placeholder="Username" 
+          pattern="[A-Za-z][A-Za-z0-9\-]*" minlength="3" maxlength="30" title="Only letters, numbers or dash" />
+        <p class="validator-hint hidden">
+          Must be 3 to 30 characters
+          <br/>containing only letters, numbers or dash
+        </p>
+      </div>
+      <div>
+        <input name="password" type="password" class="input validator" required placeholder="Password" minlength="5"   />
+      </div>
+      <button class="btn btn-primary w-full">Login</button>
+    </form>
+  </div>
+</main>
+{% endblock %}

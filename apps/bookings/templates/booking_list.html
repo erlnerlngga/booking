@@ -1,0 +1,126 @@
+{% extends "dashboard_base.html" %} 
+
+{% block page_name %} 
+  My Bookings 
+{% endblock %} 
+
+{% block dashboard_content %}
+  <main class="max-w-6xl m-auto space-y-4">
+    <section class="flex items-center gap-8 mb-18">
+      <div class="card w-96 bg-primary text-primary-content card-md shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title">Pending Tickets</h2>
+          <p>Awaiting review</p>
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock text-amber-500"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <p class="text-3xl font-bold">{{ booking_pending }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card w-96 bg-primary text-primary-content card-md shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title">Approved Tickets</h2>
+          <p>Confirmed bookings</p>
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big text-green-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+            <p class="text-3xl font-bold">{{ booking_approved }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card w-96 bg-primary text-primary-content card-md shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title">Rejected Tickets</h2>
+          <p>Declined bookings</p>
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x-icon lucide-circle-x text-red-500"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+            <p class="text-3xl font-bold">{{ booking_rejected }}</p>
+          </div>
+        </div>
+      </div>
+
+      
+    </section>
+
+    <section class="space-y-6 mx-auto">
+      <div class="flex justify-between">
+        <div class="flex items-center gap-2">
+          <div class="badge badge-info bg-blue-100 border-blue-100 text-blue-800">
+            All Bookings
+          </div>
+          <div class="badge badge-success bg-green-100 border-green-100 text-green-800">
+            <svg class="size-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor" stroke-linejoin="miter" stroke-linecap="butt"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></circle><polyline points="7 13 10 16 17 8" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></polyline></g></svg>
+            Approved
+          </div>
+          <div class="badge badge-warning bg-amber-100 border-amber-100 text-amber-800">
+            <svg class="size-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18"><g fill="currentColor"><path d="M7.638,3.495L2.213,12.891c-.605,1.048,.151,2.359,1.362,2.359H14.425c1.211,0,1.967-1.31,1.362-2.359L10.362,3.495c-.605-1.048-2.119-1.048-2.724,0Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path><line x1="9" y1="6.5" x2="9" y2="10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></line><path d="M9,13.569c-.552,0-1-.449-1-1s.448-1,1-1,1,.449,1,1-.448,1-1,1Z" fill="currentColor" data-stroke="none" stroke="none"></path></g></svg>
+            Pending
+          </div>
+          <div class="badge badge-error bg-red-100 border-red-100 text-red-800">
+            <svg class="size-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor"><rect x="1.972" y="11" width="20.056" height="2" transform="translate(-4.971 12) rotate(-45)" fill="currentColor" stroke-width="0"></rect><path d="m12,23c-6.065,0-11-4.935-11-11S5.935,1,12,1s11,4.935,11,11-4.935,11-11,11Zm0-20C7.038,3,3,7.037,3,12s4.038,9,9,9,9-4.037,9-9S16.962,3,12,3Z" stroke-width="0" fill="currentColor"></path></g></svg>
+            Rejected
+          </div>
+        </div>
+
+        <a href="{% url 'booking-create' %}">
+          <button class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-plus-icon lucide-circle-plus"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+            Book New Ticket
+          </button>
+        </a>
+      </div>
+      
+      {% if bookings %}
+        <div class="h-[30rem] overflow-x-auto space-y-6">
+          {% for booking in bookings %}
+            <div class="card w-full bg-primary text-primary-content card-md shadow-sm">
+              <div class="card-body flex-row">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-2">
+                    <h3 class="font-semibold">
+                      {{ booking.from_city }} to {{ booking.to_city }}
+                    </h3>
+                    {% if booking.status == 'pending' %}
+                      <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 
+                        Pending
+                      </span>
+                    {% elif booking.status == 'approved' %}
+                      <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big text-green-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+                        Approved
+                      </span>
+                    {% elif booking.status == 'rejected' %}
+                      <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x-icon lucide-circle-x text-red-500"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                        Rejected
+                      </span>
+                    {% endif %}
+                  
+                  </div>
+                  <p class="text-sm text-slate-300 mb-2">
+                    {{ booking.created_at }} • {{ booking.passenger_name }} • {{ booking.site }} • {{ booking.company }}
+                  </p>
+                  <a href="{% url 'booking' booking.id %}">
+                    <button class="btn btn-sm bg-primary-content text-primary border-primary-content">Detail</button>
+                  </a>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm text-slate-300">
+                    Booked on {{ booking.departure_date }}
+                  </p>
+
+                  {% if booking.price %}
+                    <p class="font-medium">Price: Rp {{ booking.price }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+      {% else %}
+        <h2 class="text-2xl font-bol text-center">There's no bookings.</h2>
+      {% endif %}
+    </section>
+  </main>
+{% endblock %}

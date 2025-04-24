@@ -1,0 +1,82 @@
+{% extends 'dashboard_base.html' %}
+
+{% block page_name %}
+    Create Booking
+{% endblock %}
+
+{% block dashboard_content %}
+    <main class="max-w-2xl m-auto space-y-4 mt-36">
+        <div class="card bg-base-100 shadow-sm">
+            <div class="card-body">
+               
+                <h2 class="text-3xl font-bold">Booking Request</h2>
+               
+
+                <form method="post" class="space-y-6 mt-6">
+                    {% csrf_token %}
+                    <div class="flex gap-2">
+                        <label class="floating-label w-full">
+                            <span>From</span>
+                            <input type="text" name="from_city" placeholder="From" class="input input-md w-full" />
+                        </label>
+
+                        <label class="floating-label w-full">
+                            <span>To</span>
+                            <input type="text" name="to_city" placeholder="To" class="input input-md w-full" />
+                        </label>
+                    </div>
+
+                    <label class="input w-full">
+                        <span class="label">Departure date</span>
+                        <input type="date" name="departure_date" />
+                    </label>
+
+                    <div class="flex gap-2">
+                        <label class="floating-label w-full">
+                            <span>NIK (ID Employee)</span>
+                            <input type="text" name="passenger_id" placeholder="NIK (ID Employee)" class="input input-md w-full" />
+                        </label>
+
+                        <label class="floating-label w-full">
+                            <span>Name</span>
+                            <input type="text" name="passenger_name" placeholder="Name" class="input input-md w-full" />
+                        </label>
+                    </div>
+
+                    <label class="floating-label w-full">
+                        <span>Email</span>
+                        <input type="passenger_email" name="passenger_email" placeholder="mail@site.com" class="input input-md" />
+                      </label>
+
+                    <div class="flex gap-2">
+                        <label class="floating-label w-full">
+                            <span>Job Title</span>
+                            <input type="text" name="job_title" placeholder="Job Title" class="input input-md w-full" />
+                        </label>
+
+                        <label class="floating-label w-full">
+                            <span>Department</span>
+                            <input type="text" name="department" placeholder="Department" class="input input-md w-full" />
+                        </label>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <label class="floating-label w-full">
+                            <span>Company</span>
+                            <input type="text" name="company" placeholder="Company" class="input input-md w-full" />
+                        </label>
+
+                        <label class="floating-label w-full">
+                            <span>Site</span>
+                            <input type="text" name="site" placeholder="Site" class="input input-md w-full" />
+                        </label>
+                    </div>
+                    
+                    <div class="mt-2">
+                        <button class="btn btn-primary btn-block">Submit Booking Request</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+    </main>
+{% endblock %}

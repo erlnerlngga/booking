@@ -1,0 +1,203 @@
+{% extends 'dashboard_base.html' %}
+
+{% block page_name %}
+    Booking
+{% endblock %}
+
+{% block dashboard_content %}
+    <main class="max-w-6xl m-auto space-y-4"> 
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="card bg-primary text-primary-content card-md shadow-sm md:col-span-2 h-fit">
+                <div class="card-body">
+                    <section class="flex justify-between items-center">
+                        <div>
+                            <h2 class="card-title">Booking Information</h2>
+                            <p class="text-sm text-slate-300">Detail about the booking • 23/07/2025</p>
+                        </div>
+                        <div class="">
+                            {% if booking.status == 'pending' %}
+                            <div class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock text-amber-500"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Pending Review
+                            </div>
+                            {% endif %}
+
+                            {% if booking.status == 'approved' %} 
+                            <div class="bg-green-100 text-green-800 px-3 py-1 rounded-full flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big text-green-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg> Approved
+                            </div> 
+                            {% endif %}
+
+                            {% if booking.status == 'rejected' %} 
+                            <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x-icon lucide-circle-x text-red-500"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg> Rejected
+                            </div> 
+                            {% endif %}
+
+                        </div>
+                    </section>
+
+                    <section class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                            <h3 class="text-sm font-medium text-slate-300 mb-1">From</h3>
+                            <p class="font-medium">Jakarta</p>
+                            </div>
+                            <div>
+                            <h3 class="text-sm font-medium text-slate-300 mb-1">To</h3>
+                            <p class="font-medium">Singapore</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                            <h3 class="text-sm font-medium text-slate-300 mb-1">Travel Date</h3>
+                            <p class="font-medium">31/07/2025</p>
+                            </div>
+                            <div>
+                            <h3 class="text-sm font-medium text-slate-300 mb-1">Email</h3>
+                            <p class="font-medium">jhondoe@email.com</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                            <h3 class="text-sm font-medium text-slate-300 mb-1">NIK (Employee ID)</h3>
+                            <p class="font-medium">12345</p>
+                            </div>
+                            <div>
+                            <h3 class="text-sm font-medium text-slate-300 mb-1">Name</h3>
+                            <p class="font-medium">John Doe</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                            <h3 class="text-sm font-medium text-slate-300 mb-1">Job Title</h3>
+                            <p class="font-medium">Dont know</p>
+                            </div>
+                            <div>
+                            <h3 class="text-sm font-medium text-slate-300 mb-1">Department</h3>
+                            <p class="font-medium">Dont know</p>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                            <h3 class="text-sm font-medium text-slate-300 mb-1">Company</h3>
+                            <p class="font-medium">Lan & Co</p>
+                            </div>
+                            <div>
+                            <h3 class="text-sm font-medium text-slate-300 mb-1">Site</h3>
+                            <p class="font-medium">Lan</p>
+                            </div>
+                        </div>
+
+                        {% if booking.price %}
+                            <div>
+                                <h3 class="text-sm font-medium text-slate-300 mb-1">Ticket Price</h3>
+                                <p class="font-medium">Rp 1.500.000</p>
+                            </div>
+                        {% endif %}
+                    </section>
+                </div>
+            </div>
+
+            <section class="space-y-8">
+            <div class="card bg-primary text-primary-content card-md shadow-sm h-fit">
+                <div class="card-body">
+                    <section class="mb-2">
+                        <h2 class="text-2xl font-bold">Booking Request</h2>
+                        <p class="text-sm text-slate-300">
+                            Current status of your booking
+                        </p>
+                    </section>
+
+                    <section> 
+                        {% if booking.status == 'pending' %}
+                        <div class="flex flex-col items-center justify-center py-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock text-amber-500"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            <h3 className="font-medium text-lg">Awaiting Approval</h3>
+                            <p className="text-sm text-slate-600 text-center mt-2">
+                                Your ticket is being reviewed by an administrator.
+                            </p>
+                        </div>
+                        {% endif %}
+
+                        {% if booking.status == 'approved' %}
+                         <div class="flex flex-col items-center justify-center py-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big-icon lucide-circle-check-big text-green-500"><path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/></svg>
+                            <h3 className="font-medium text-lg">Ticket Approved</h3>
+                            <p className="text-sm text-slate-600 text-center mt-2">
+                                Your ticket has been approved and is ready for download.
+                            </p>
+                        </div> 
+                        {% endif %}
+
+                       
+                        {% if booking.status == 'rejected' %} 
+                        <div class="flex flex-col items-center justify-center py-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x-icon lucide-circle-x text-red-500"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                            <h3 className="font-medium text-lg">Ticket Rejected</h3>
+                            <p className="text-sm text-slate-600 text-center mt-2">
+                                Your ticket request has been rejected. Please contact support for more information.
+                            </p>
+                        </div> 
+                        {% endif %}
+                    </section>
+
+                    <section>
+                        {% if booking.ticket %}
+                            <a href="{{ booking.ticket.url }}" target="_blank">
+                                <button class="btn bg-primary-content text-primary border-primary-content w-full">Download Ticket</button>
+                            </a>                    
+                        {% endif %}    
+                    </section>
+                </div>
+            </div>
+           
+     
+
+
+            {% if user_setting.role == 'admin' %}
+            <div class="card bg-primary text-primary-content card-md shadow-sm h-fit">
+                <div class="card-body">
+                    <section class="mb-2">
+                        <h2 class="text-2xl font-bold">Booking Status</h2>
+                        <p class="text-sm text-slate-300">
+                            Manage this booking
+                        </p>
+                    </section>
+
+                    <section>
+                        <form method="post" class="space-y-4" action="{% url 'booking-update' booking.id %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div>
+                                <label class="text-base-300">Ticket price (Rp)</label>
+                                <input type="number" name="price" placeholder="Ticket price (Rp)" class="input input-md text-primary" />
+                            </div>
+                            
+                            <div>
+                                <label class="text-base-300">Upload ticket</label>
+                                <input name="ticket" type="file" class="file-input text-primary" />
+                            </div>
+
+                            <div>
+                                <label class="text-base-300">Status</label>
+                                <select class="select text-primary" name="status">
+                                    <option disabled selected value="pending">Pending</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="rejected">Rejected</option>
+                                </select>
+                            </div>
+                            
+                            <button class="btn bg-primary-content text-primary border-primary-content w-full mt-4">Save</button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+            {% endif %}
+
+        </section>
+        </div>
+    </main>
+{% endblock %}
