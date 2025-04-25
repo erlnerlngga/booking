@@ -40,62 +40,62 @@
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                             <h3 class="text-sm font-medium text-slate-300 mb-1">From</h3>
-                            <p class="font-medium">Jakarta</p>
+                            <p class="font-medium">{{ booking.from_city }}</p>
                             </div>
                             <div>
                             <h3 class="text-sm font-medium text-slate-300 mb-1">To</h3>
-                            <p class="font-medium">Singapore</p>
+                            <p class="font-medium">{{ booking.to_city }}</p>
                             </div>
                         </div>
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                             <h3 class="text-sm font-medium text-slate-300 mb-1">Travel Date</h3>
-                            <p class="font-medium">31/07/2025</p>
+                            <p class="font-medium">{{ booking.departure_date }}</p>
                             </div>
                             <div>
                             <h3 class="text-sm font-medium text-slate-300 mb-1">Email</h3>
-                            <p class="font-medium">jhondoe@email.com</p>
+                            <p class="font-medium">{{ booking.passenger_email }}</p>
                             </div>
                         </div>
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                             <h3 class="text-sm font-medium text-slate-300 mb-1">NIK (Employee ID)</h3>
-                            <p class="font-medium">12345</p>
+                            <p class="font-medium">{{ booking.passenger_id }}</p>
                             </div>
                             <div>
                             <h3 class="text-sm font-medium text-slate-300 mb-1">Name</h3>
-                            <p class="font-medium">John Doe</p>
+                            <p class="font-medium">{{ booking.passenger_name }}</p>
                             </div>
                         </div>
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                             <h3 class="text-sm font-medium text-slate-300 mb-1">Job Title</h3>
-                            <p class="font-medium">Dont know</p>
+                            <p class="font-medium">{{ booking.job_title }}</p>
                             </div>
                             <div>
                             <h3 class="text-sm font-medium text-slate-300 mb-1">Department</h3>
-                            <p class="font-medium">Dont know</p>
+                            <p class="font-medium">{{ booking.department }}</p>
                             </div>
                         </div>
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                             <h3 class="text-sm font-medium text-slate-300 mb-1">Company</h3>
-                            <p class="font-medium">Lan & Co</p>
+                            <p class="font-medium">{{ booking.company }}</p>
                             </div>
                             <div>
                             <h3 class="text-sm font-medium text-slate-300 mb-1">Site</h3>
-                            <p class="font-medium">Lan</p>
+                            <p class="font-medium">{{ booking.site }}</p>
                             </div>
                         </div>
 
                         {% if booking.price %}
                             <div>
                                 <h3 class="text-sm font-medium text-slate-300 mb-1">Ticket Price</h3>
-                                <p class="font-medium">Rp 1.500.000</p>
+                                <p class="font-medium">Rp {{ booking.price }}</p>
                             </div>
                         {% endif %}
                     </section>
